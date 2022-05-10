@@ -1,0 +1,18 @@
+.animals {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.animal {
+    display: flex;
+}
+
+.animal-details {
+    padding: 2rem;
+}
+
+.image-text {
+    text-align: center;
+    font-style: italic;
+}
