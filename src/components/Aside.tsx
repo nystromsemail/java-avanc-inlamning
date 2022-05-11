@@ -17,6 +17,7 @@ export function Aside() {
         hungryWarning) { // om skillnad i tid i timmar är större än hungryWarning
             hungryAnimals = [...hungryAnimals, animal];
         }
+        return 0;
     })
 
     return (<>
