@@ -12,7 +12,6 @@ export function Animal(props: IAnimalProps) {
         .getItem("animals") || "[]"));
     const index: number = useParams().id as unknown as number - 1;
     const hungryTime: number = 3; // det ska gå att mata djuret efter 3 timmar
-    const hungryWarning: number = 4; // varningsnotis efter 4 timmar
 
     function handleClick() {
         animals[index].isFed = true;

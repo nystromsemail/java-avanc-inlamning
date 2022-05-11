@@ -1,4 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
+import { Aside } from "../components/Aside";
 import "../styles/Layout.css"
 
 export function Layout() {
@@ -15,7 +16,7 @@ export function Layout() {
             </header>
             <section>
                 <aside>
-                    <div>ASIDE</div>
+                    <Aside />
                 </aside>
                 <main><Outlet /></main>
             </section>

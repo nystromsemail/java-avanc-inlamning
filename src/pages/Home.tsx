@@ -24,7 +24,7 @@ export function Home() {
                             <span className="short-description">{animal.shortDescription}</span>
                         </div>
                     </div>
-                )
+                );
             })}
         </div>
     )

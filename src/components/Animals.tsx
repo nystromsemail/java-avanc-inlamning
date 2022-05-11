@@ -21,7 +21,7 @@ export function Animals() {
             .then((response) => {
                 updateAnimals(response.data)
             })
-    }, [])
+    })
 
     function updateAnimals(anim: IAnimal[]) {
         saveToLocalStorage([...anim]);
