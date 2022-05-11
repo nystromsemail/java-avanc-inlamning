@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { IAnimal } from "../models/IAnimal";
 import "./../styles/Animals.css"
 
-export function PrintAnimal() {
+export function Home() {
     const [animals, setAnimals] = useState<IAnimal[]>(JSON.parse(localStorage
         .getItem("animals") || "[]"));
     

@@ -6,8 +6,8 @@ import { About } from "../pages/About";
 import { Contact } from "../pages/Contact";
 import { Layout } from "../pages/Layout";
 import { NotFound } from "../pages/NotFound";
-import { Animal } from "./Animal";
-import { PrintAnimal } from "./PrintAnimal";
+import { Animal } from "../pages/Animal";
+import { Home } from "../pages/Home";
 
 export function Animals() {
     // hämtar djur från localStorage eller sätter till []
@@ -40,7 +40,7 @@ export function Animals() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                <Route index element={<PrintAnimal />}></Route>
+                <Route index element={<Home />}></Route>
                 <Route path="/about" element={<About />}></Route>
                 <Route path="/contact" element={<Contact />}></Route>
                 <Route path="/animal/:id" element={<Animal update={updateAnimals}/>}></Route>

@@ -41,6 +41,7 @@
 
 .layout main {
     width: 80%;
+    padding: 1rem;
     background-color: rgb(156, 252, 164);
 }
 
