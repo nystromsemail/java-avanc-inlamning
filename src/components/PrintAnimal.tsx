@@ -1,16 +1,31 @@
-import { isPropertySignature } from "typescript";
-import { StyledButton } from "../styles/StyledButton";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { IAnimal } from "../models/IAnimal";
+import "./../styles/Animals.css"
 
-interface IPrintAnimalProps {
-    feed(i: number): void;
-}
-
-export function PrintAnimal(props: IPrintAnimalProps) {
-
-    function handleClick() {
-        props.feed(0); // i det här testfallet, matar djur nr 0
-    }
-    return (<>
-        <StyledButton onClick={handleClick}>Mata</StyledButton>
-    </>)
+export function PrintAnimal() {
+    const [animals, setAnimals] = useState<IAnimal[]>(JSON.parse(localStorage
+        .getItem("animals") || "[]"));
+    
+    return (
+        <div className="animals">
+            {animals.map((animal) => {
+                return (
+                    <div key={animal.id} className="animal-card">
+                        <div>                            
+                            <Link to={"/animal/" + animal.id} className="link">
+                                <div>{animal.name}</div>
+                                <div className="image-container">
+                                    <img src={animal.imageUrl}
+                                    alt={animal.name}
+                                    className="image"/>
+                                </div>
+                            </Link>                            
+                            <span className="short-description">{animal.shortDescription}</span>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
+    )
 }

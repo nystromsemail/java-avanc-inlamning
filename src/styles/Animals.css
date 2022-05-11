@@ -8,6 +8,29 @@
     display: flex;
 }
 
+.animal-card {
+    width: 30%;
+    min-width: 20rem;
+    display: flex;
+    
+}
+
+.short-description {
+    width: 50%;
+}
+
+.link {
+    width: 50%;
+}
+
+.image-container {
+    width: 100%;
+}
+
+.image-container .image {
+    width: 100%;
+}
+
 .animal-details {
     padding: 2rem;
 }

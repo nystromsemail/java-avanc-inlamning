@@ -6,27 +6,22 @@ import { About } from "../pages/About";
 import { Contact } from "../pages/Contact";
 import { Layout } from "../pages/Layout";
 import { NotFound } from "../pages/NotFound";
+import { Animal } from "./Animal";
 import { PrintAnimal } from "./PrintAnimal";
 
 export function Animals() {
-    const [animals, setAnimals] = useState<IAnimal[]>([]);
+    // hämtar djur från localStorage eller sätter till []
+    const [animals, setAnimals] = useState<IAnimal[]>(JSON.parse(localStorage.getItem("animals") || "[]"));
 
-    // kör en gång vid första laddning av sidan för att hämta ur localStorage
-    // ansätter en tom lista om parametern inte finns i localStorage
-    useEffect(() => {
-        if (animals.length !==0) return;
-        getFromLocalStorage();
-    })
-
-    // hämtar djur från API om listan (fortfarande) är tom
+    // hämtar djur från API om listan är tom
     useEffect(() => {
         if (animals.length !==0) return;
         axios
             .get<IAnimal[]>("https://animals.azurewebsites.net/api/animals")
             .then((response) => {
-                updateAnimals(response.data);
+                updateAnimals(response.data)
             })
-    });
+    }, [])
 
     function updateAnimals(anim: IAnimal[]) {
         saveToLocalStorage([...anim]);
@@ -36,26 +31,22 @@ export function Animals() {
     function saveToLocalStorage(anim: IAnimal[]) {
         localStorage.setItem("animals", JSON.stringify(anim))
     }
-
-    function getFromLocalStorage() {
-        let tempAnimals: IAnimal[] = JSON.parse(localStorage.getItem("animals") || "[]");
-        setAnimals([...tempAnimals]);
-    }
     
     function feedAnimal(i: number) {
         animals[i].isFed = true;
         updateAnimals([...animals])
     }
     
-
+    console.log("Innan return: ", animals);
+    
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                <Route index element={<PrintAnimal feed={feedAnimal}/>}></Route>
+                <Route index element={<PrintAnimal />}></Route>
                 <Route path="/about" element={<About />}></Route>
                 <Route path="/contact" element={<Contact />}></Route>
-                <Route path="/animal/:id" element={<About />}></Route>
+                <Route path="/animal/:id" element={<Animal />}></Route>
                 <Route path="/*" element={<NotFound />}></Route>
                 </Route>
             </Routes>
