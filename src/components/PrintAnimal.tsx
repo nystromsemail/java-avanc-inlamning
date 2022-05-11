@@ -11,7 +11,7 @@ export function PrintAnimal() {
         <div className="animals">
             {animals.map((animal) => {
                 return (
-                    <div key={animal.id} className="animal-card">
+                    <div key={animal.id} className="animals-card">
                         <div>                            
                             <Link to={"/animal/" + animal.id} className="link">
                                 <div>{animal.name}</div>

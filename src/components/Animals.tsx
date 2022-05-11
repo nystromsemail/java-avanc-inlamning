@@ -32,10 +32,7 @@ export function Animals() {
         localStorage.setItem("animals", JSON.stringify(anim))
     }
     
-    function feedAnimal(i: number) {
-        animals[i].isFed = true;
-        updateAnimals([...animals])
-    }
+    
     
     console.log("Innan return: ", animals);
     
@@ -46,7 +43,7 @@ export function Animals() {
                 <Route index element={<PrintAnimal />}></Route>
                 <Route path="/about" element={<About />}></Route>
                 <Route path="/contact" element={<Contact />}></Route>
-                <Route path="/animal/:id" element={<Animal />}></Route>
+                <Route path="/animal/:id" element={<Animal update={updateAnimals}/>}></Route>
                 <Route path="/*" element={<NotFound />}></Route>
                 </Route>
             </Routes>
