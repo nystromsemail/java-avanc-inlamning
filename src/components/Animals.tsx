@@ -13,7 +13,7 @@ export function Animals() {
     // hämtar djur från localStorage eller sätter till []
     const [animals, setAnimals] = useState<IAnimal[]>(JSON.parse(localStorage.getItem("animals") || "[]"));
 
-    // hämtar djur från API om listan är tom
+    // hämtar djur från API om djurlistan är tom
     useEffect(() => {
         if (animals.length !==0) return;
         axios
@@ -31,10 +31,6 @@ export function Animals() {
     function saveToLocalStorage(anim: IAnimal[]) {
         localStorage.setItem("animals", JSON.stringify(anim))
     }
-    
-    
-    
-    console.log("Innan return: ", animals);
     
     return (
         <BrowserRouter>

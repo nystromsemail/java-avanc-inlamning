@@ -11,7 +11,7 @@ export function Animal(props: IAnimalProps) {
     const [animals, setAnimals] = useState<IAnimal[]>(JSON.parse(localStorage
         .getItem("animals") || "[]"));
     const index: number = useParams().id as unknown as number - 1;
-    const hungryTime: number = 3; // det ska gå att mata djuret efter 3 timmar
+    const hungryTime: number = 3; // det ska gå att mata igen djuret efter 3 timmar
 
     function handleClick() {
         animals[index].isFed = true;
@@ -29,20 +29,24 @@ export function Animal(props: IAnimalProps) {
             <StyledButton onClick={handleClick}>Mata {animals[index].name}</StyledButton>
         </>
     } else {
-
             // tidsmatematik-magi
+        // total tidsskillnad i sekunder
         let totDiffS = Math.floor((timeNow - Date.parse(animals[index].lastFed))/1000);
-        // total time difference in seconds
-        let totDiffM = Math.floor(totDiffS / 60); // total time difference in minutes
-        diffH = Math.floor(totDiffM / 60); // time difference in hours
+        // total tidsskillnad i minuter
+        let totDiffM = Math.floor(totDiffS / 60);
+        // tidsskillnad i timmar
+        diffH = Math.floor(totDiffM / 60);
+        // subtrahera alla fulla timmar från minuter
         let diffM = totDiffM - (diffH * 60);
+        // subtrahera alla fulla minuter och timmar från sekunder
         let diffS = totDiffS - (diffM * 60) - (diffH * 60 * 60);
         let hTag, mTag = <></>;
         if (diffH > 0) hTag = <>{diffH} timmar </>;
         if (diffM > 0) mTag = <>{diffM} minuter</>;
         let sTag = <>{diffS} sekunder</>;
+        // lägger grammatiskt till "och" om det finns hela timmar eller minuter
         if (diffH > 0 || diffM > 0) sTag = <>och {sTag}</>
-        // lägger till "och" om det finns hela timmar eller minuter
+        
         timeTag = <>
             <div>{animals[index].name} blev senast matad {animals[index].lastFed},</div>
             <div>vilket var {hTag} {mTag} {sTag} sedan.</div>
@@ -67,7 +71,7 @@ export function Animal(props: IAnimalProps) {
     return (
         <div className="animal">
             <div className="animal-card">
-                <div className="half">
+                <div >
                     <img className="single-image"
                     src={animals[index].imageUrl}
                     alt={animals[index].name}/>
@@ -80,8 +84,7 @@ export function Animal(props: IAnimalProps) {
                         {feedTag}
                     </div>
                 </div>
-            </div>
-            
+            </div>           
         </div>
     )
 }
